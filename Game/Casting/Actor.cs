@@ -77,7 +77,7 @@ namespace Unit04.Game.Casting
         /// </summary>
         /// <param name="maxX">The maximum x value.</param>
         /// <param name="maxY">The maximum y value.</param>
-        public void MoveNext(int maxX, int maxY)
+        public void MoveNext(int maxX, int maxY)  //make if statement so that can only move left or right
         {
             int x = ((position.GetX() + velocity.GetX()) + maxX) % maxX;
             int y = ((position.GetY() + velocity.GetY()) + maxY) % maxY;

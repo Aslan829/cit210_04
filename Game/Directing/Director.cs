@@ -69,7 +69,7 @@ namespace Unit04.Game.Directing
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
 
-            foreach (Actor actor in artifacts)
+            foreach (Actor actor in artifacts) //what happens when merge artifacts
             {
                 if (robot.GetPosition().Equals(actor.GetPosition()))
                 {

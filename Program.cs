@@ -49,7 +49,7 @@ namespace Unit04
             robot.SetText("#");
             robot.SetFontSize(FONT_SIZE);
             robot.SetColor(WHITE);
-            robot.SetPosition(new Point(MAX_X / 2, MAX_Y / 2)); //set Y to be bottom of screen
+            robot.SetPosition(new Point(MAX_X / 2, MAX_Y - CELL_SIZE)); //set Y to be bottom of screen - cell_size so it can fit on screen
             cast.AddActor("robot", robot);
 
             // load the messages
