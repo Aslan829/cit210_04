@@ -65,7 +65,7 @@ namespace Unit04
 
                 //sets positions
                 int x = random.Next(1, COLS);
-                int y = random.Next(1, ROWS);
+                int y = 0; //set position at the top of screen
                 Point position = new Point(x, y);
                 position = position.Scale(CELL_SIZE);
 
