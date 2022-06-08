@@ -91,7 +91,7 @@ namespace Unit04.Game.Casting
         /// </summary>
         /// <param name="group">The group name.</param>
         /// <param name="actor">The actor to remove.</param>
-        public void RemoveActor(string group, Actor actor)
+        public void RemoveActor(string group, Actor actor) //can delete gem/rock when the two merge
         {
             if (actors.ContainsKey(group))
             {

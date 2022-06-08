@@ -62,12 +62,13 @@ namespace Unit04.Game.Directing
         {
             Actor banner = cast.GetFirstActor("banner");
             Actor robot = cast.GetFirstActor("robot");
-            List<Actor> artifacts = cast.GetActors("artifacts");
+            List<Actor> artifacts = cast.GetActors("artifacts"); //update to move artifacts down here
 
             banner.SetText("SCORE");
             int maxX = videoService.GetWidth();
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
+            
 
             foreach (Actor actor in artifacts) //what happens when merge artifacts
             {
