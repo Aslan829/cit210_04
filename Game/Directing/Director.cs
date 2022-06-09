@@ -33,11 +33,15 @@ namespace Unit04.Game.Directing
         /// <param name="cast">The given cast.</param>
         public void StartGame(Cast cast)
         {
+            Actor banner = cast.GetFirstActor("banner");
+            int score = 0; //banner score, easy to update here
+            banner.SetText("SCORE:" + score);
+
             videoService.OpenWindow();
             while (videoService.IsWindowOpen())
             {
                 GetInputs(cast);
-                DoUpdates(cast);
+                DoUpdates(cast, banner, score); //find mroe effecient solution to this, this isnt good
                 DoOutputs(cast);
             }
             videoService.CloseWindow();
@@ -58,14 +62,16 @@ namespace Unit04.Game.Directing
         /// Updates the robot's position and resolves any collisions with artifacts.
         /// </summary>
         /// <param name="cast">The given cast.</param>
-        private void DoUpdates(Cast cast)
+        private void DoUpdates(Cast cast, Actor banner, int score)
         {
-            Actor banner = cast.GetFirstActor("banner");
+            
             Actor robot = cast.GetFirstActor("robot");
             List<Actor> rocks = cast.GetActors("rocks"); //Rocks list / bring gem list too
             List<Actor> gems = cast.GetActors("gems");
 
-            banner.SetText("SCORE");
+            /*int score = 0; //banner score
+            banner.SetText("SCORE:" + score);*/
+            
             int maxX = videoService.GetWidth();
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
@@ -80,8 +86,11 @@ namespace Unit04.Game.Directing
                 if (robot.GetPosition().Equals(actor.GetPosition()))//what happens when merge artifacts
                 {
                     Artifact artifact = (Artifact) actor;
-                    string message = artifact.GetMessage();
-                    banner.SetText(message);
+                    score -= 1;
+                    banner.SetText("SCORE:" + score);
+                    /*artifact.SetMessage(-1);
+                    int message = artifact.GetMessage();
+                    banner.SetText("-1");*/
                 }
             } 
 
@@ -95,8 +104,12 @@ namespace Unit04.Game.Directing
                 if (robot.GetPosition().Equals(actor.GetPosition()))//what happens when merge artifacts
                 {
                     Artifact artifact = (Artifact) actor;
-                    string message = artifact.GetMessage();
-                    banner.SetText(message);
+                    score += 1;
+                    banner.SetText("SCORE:" + score);
+                    /*Artifact artifact = (Artifact) actor;
+                    artifact.SetMessage(1);
+                    int message = artifact.GetMessage();
+                    banner.SetText("1");*/
                 }
             } 
         }

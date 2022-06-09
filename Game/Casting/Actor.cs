@@ -156,5 +156,10 @@ namespace Unit04.Game.Casting
             this.velocity = velocity;
         }
 
+        //Add score to current banner
+        public void changeScore(int addScore){
+            this.text = this.text + addScore; 
+        }
+
     }
 }

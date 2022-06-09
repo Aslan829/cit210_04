@@ -103,14 +103,6 @@ namespace Unit04
                     //rock.SetMessage(message);
                     cast.AddActor("gems", gem); 
                 }
-                //puts it together
-                /*Artifact rock = new Artifact();
-                artifact.SetText(text);
-                artifact.SetFontSize(FONT_SIZE);
-                artifact.SetColor(color);
-                artifact.SetPosition(position);
-                artifact.SetMessage(message);
-                cast.AddActor("artifacts", artifact);*/
             }
 
             // start the game
