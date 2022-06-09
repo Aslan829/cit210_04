@@ -56,55 +56,7 @@ namespace Unit04
             List<string> messages = File.ReadAllLines(DATA_PATH).ToList<string>();
 
             // create the artifacts
-            Random random = new Random();
-            //makes # of default artifacts (maybe change to be random)
-            for (int i = 0; i < DEFAULT_ARTIFACTS; i++)
-            {
-
-                //Makes random variables
-                /*string text = ((char)random.Next(33, 126)).ToString();
-                string message = messages[i];*/
-
-                //sets positions
-                int x = random.Next(1, COLS);
-                int y = 0; //set position at the bottom of screen
-                Point position = new Point(x, y);
-                position = position.Scale(CELL_SIZE);
-
-                //sets colors
-                int r = random.Next(0, 256);
-                int g = random.Next(0, 256);
-                int b = random.Next(0, 256);
-                Color color = new Color(r, g, b);
-
-
-                //Make a random variable. If 1 --> gem, if 2 --> rock
-                int choice = random.Next(0,2);
-
-                //Make a gem
-                if (choice == 0)
-                {
-                    Artifact Rock = new Artifact();
-                    Rock.SetText("O");
-                    Rock.SetFontSize(FONT_SIZE);
-                    Rock.SetColor(color);
-                    Rock.SetPosition(position);
-                    //rock.SetMessage(message);
-                    cast.AddActor("rocks", Rock);
-                } 
-                //Makes the gem
-                else if (choice == 1)
-                {
-                    Artifact gem = new Artifact();
-                    gem.SetText("*");
-                    gem.SetFontSize(FONT_SIZE);
-                    gem.SetColor(color);
-                    gem.SetPosition(position);
-                    //rock.SetMessage(message);
-                    cast.AddActor("gems", gem); 
-                }
-            }
-
+            
             // start the game
             KeyboardService keyboardService = new KeyboardService(CELL_SIZE); //start keyboard reading
             VideoService videoService 

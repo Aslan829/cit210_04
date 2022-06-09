@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Unit04.Game.Casting;
+using Unit04.Game.Directing;
 using Unit04.Game.Services;
-
 
 namespace Unit04.Game.Directing
 {
@@ -65,6 +68,8 @@ namespace Unit04.Game.Directing
         private void DoUpdates(Cast cast, Actor banner, int score)
         {
             
+            //Make 2 new gems every update
+
             Actor robot = cast.GetFirstActor("robot");
             List<Actor> rocks = cast.GetActors("rocks"); //Rocks list / bring gem list too
             List<Actor> gems = cast.GetActors("gems");
@@ -75,12 +80,63 @@ namespace Unit04.Game.Directing
             int maxX = videoService.GetWidth();
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
+
+            Random random = new Random();
+            //makes # of default artifacts (maybe change to be random)
+            for (int i = 0; i < 2; i++)
+            {
+
+                //Makes random variables
+                /*string text = ((char)random.Next(33, 126)).ToString();
+                string message = messages[i];*/
+
+                //sets positions
+                int x = random.Next(1, 60);
+                int y = 0; //set position at the bottom of screen
+                Point position = new Point(x, y);
+                position = position.Scale(15);
+
+                //sets colors
+                int r = random.Next(0, 256);
+                int g = random.Next(0, 256);
+                int b = random.Next(0, 256);
+                Color color = new Color(r, g, b);
+
+
+                //Make a random variable. If 1 --> gem, if 2 --> rock
+                int choice = random.Next(0,2);
+
+                //Make a gem
+                if (choice == 0)
+                {
+                    Artifact Rock = new Artifact();
+                    Rock.SetText("O");
+                    Rock.SetFontSize(15);
+                    Rock.SetColor(color);
+                    Rock.SetPosition(position);
+                    //rock.SetMessage(message);
+                    cast.AddActor("rocks", Rock);
+                } 
+                //Makes the gem
+                else if (choice == 1)
+                {
+                    Artifact gem = new Artifact();
+                    gem.SetText("*");
+                    gem.SetFontSize(15);
+                    gem.SetColor(color);
+                    gem.SetPosition(position);
+                    //rock.SetMessage(message);
+                    cast.AddActor("gems", gem); 
+                }
+            }
+
+
             
             //foreach for rocks / interaction method
             foreach (Actor actor in rocks) 
             {
                 Point actor_position = actor.GetPosition();//Edited here
-                actor_position.Down(15);//edited here (go down cell size)
+                actor_position.Down(5);//edited here (go down cell size)
                 //made go off screen?
 
                 if (robot.GetPosition().Equals(actor.GetPosition()))//what happens when merge artifacts
@@ -98,7 +154,7 @@ namespace Unit04.Game.Directing
             foreach (Actor actor in gems) 
             {
                 Point actor_position = actor.GetPosition();//Edited here
-                actor_position.Down(15);//edited here (go down cell size)
+                actor_position.Down(5);//edited here (go down cell size)
                 //made go off screen?
 
                 if (robot.GetPosition().Equals(actor.GetPosition()))//what happens when merge artifacts
