@@ -1,7 +1,5 @@
-# Robot Finds Kitten
-Simon Carless once described robotfindskitten as "less a game and more a way of 
-life ... It's fun to wander around until you find a kitten, at which point you feel 
-happy and can start again". I don't think I could have said it better myself!
+# Greed
+See how much money you can make from this game! Get the gems (*) and avoid the rocks. (O)
 
 ---
 ## Getting Started
