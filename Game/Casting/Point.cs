@@ -35,6 +35,13 @@ namespace Unit04.Game.Casting
             return new Point(x, y);
         }
 
+        //Make point go down
+        public Point Down(int newY) //Added here
+        {
+            this.y += newY;
+            return new Point(x, y);
+        }
+
         /// <summary>
         /// Whether or not this Point is equal to the given one.
         /// </summary>

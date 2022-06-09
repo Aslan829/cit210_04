@@ -72,6 +72,10 @@ namespace Unit04.Game.Directing
 
             foreach (Actor actor in artifacts) //what happens when merge artifacts
             {
+                Point actor_position = actor.GetPosition();//Edited here
+                actor_position.Down(15);//edited here (go down cell size)
+                //made go off screen?
+
                 if (robot.GetPosition().Equals(actor.GetPosition()))
                 {
                     Artifact artifact = (Artifact) actor;
