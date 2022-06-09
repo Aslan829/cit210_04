@@ -19,6 +19,8 @@ namespace Unit04.Game.Directing
         private KeyboardService keyboardService = null;
         private VideoService videoService = null;
 
+        private int score = 0; //banner score, easy to update here
+
         /// <summary>
         /// Constructs a new instance of Director using the given KeyboardService and VideoService.
         /// </summary>
@@ -36,15 +38,13 @@ namespace Unit04.Game.Directing
         /// <param name="cast">The given cast.</param>
         public void StartGame(Cast cast)
         {
-            Actor banner = cast.GetFirstActor("banner");
-            int score = 0; //banner score, easy to update here
-            banner.SetText("SCORE:" + score);
+            
 
             videoService.OpenWindow();
             while (videoService.IsWindowOpen())
             {
                 GetInputs(cast);
-                DoUpdates(cast, banner, score); //find mroe effecient solution to this, this isnt good
+                DoUpdates(cast); //find mroe effecient solution to this, this isnt good
                 DoOutputs(cast);
             }
             videoService.CloseWindow();
@@ -65,23 +65,24 @@ namespace Unit04.Game.Directing
         /// Updates the robot's position and resolves any collisions with artifacts.
         /// </summary>
         /// <param name="cast">The given cast.</param>
-        private void DoUpdates(Cast cast, Actor banner, int score)
+        private void DoUpdates(Cast cast)
         {
             
             //Make 2 new gems every update
-
+            Actor banner = cast.GetFirstActor("banner");
+            banner.SetText("SCORE:" + this.score);
             Actor robot = cast.GetFirstActor("robot");
             List<Actor> rocks = cast.GetActors("rocks"); //Rocks list / bring gem list too
             List<Actor> gems = cast.GetActors("gems");
 
-            /*int score = 0; //banner score
-            banner.SetText("SCORE:" + score);*/
+       
             
             int maxX = videoService.GetWidth();
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
 
             Random random = new Random();
+            
             //makes # of default artifacts (maybe change to be random)
             for (int i = 0; i < 2; i++)
             {
@@ -142,11 +143,9 @@ namespace Unit04.Game.Directing
                 if (robot.GetPosition().Equals(actor.GetPosition()))//what happens when merge artifacts
                 {
                     Artifact artifact = (Artifact) actor;
-                    score -= 1;
+                    this.score -= 1;
                     banner.SetText("SCORE:" + score);
-                    /*artifact.SetMessage(-1);
-                    int message = artifact.GetMessage();
-                    banner.SetText("-1");*/
+                    
                 }
             } 
 
@@ -160,12 +159,9 @@ namespace Unit04.Game.Directing
                 if (robot.GetPosition().Equals(actor.GetPosition()))//what happens when merge artifacts
                 {
                     Artifact artifact = (Artifact) actor;
-                    score += 1;
+                    this.score += 1;
                     banner.SetText("SCORE:" + score);
-                    /*Artifact artifact = (Artifact) actor;
-                    artifact.SetMessage(1);
-                    int message = artifact.GetMessage();
-                    banner.SetText("1");*/
+                    
                 }
             } 
         }

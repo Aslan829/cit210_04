@@ -55,7 +55,6 @@ namespace Unit04
             // load the messages
             List<string> messages = File.ReadAllLines(DATA_PATH).ToList<string>();
 
-            // create the artifacts
             
             // start the game
             KeyboardService keyboardService = new KeyboardService(CELL_SIZE); //start keyboard reading
