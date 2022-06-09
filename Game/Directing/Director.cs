@@ -62,21 +62,37 @@ namespace Unit04.Game.Directing
         {
             Actor banner = cast.GetFirstActor("banner");
             Actor robot = cast.GetFirstActor("robot");
-            List<Actor> artifacts = cast.GetActors("artifacts"); //update to move artifacts down here
+            List<Actor> rocks = cast.GetActors("rocks"); //Rocks list / bring gem list too
+            List<Actor> gems = cast.GetActors("gems");
 
             banner.SetText("SCORE");
             int maxX = videoService.GetWidth();
             int maxY = videoService.GetHeight();
             robot.MoveNext(maxX, maxY);
             
-
-            foreach (Actor actor in artifacts) //what happens when merge artifacts
+            //foreach for rocks / interaction method
+            foreach (Actor actor in rocks) 
             {
                 Point actor_position = actor.GetPosition();//Edited here
                 actor_position.Down(15);//edited here (go down cell size)
                 //made go off screen?
 
-                if (robot.GetPosition().Equals(actor.GetPosition()))
+                if (robot.GetPosition().Equals(actor.GetPosition()))//what happens when merge artifacts
+                {
+                    Artifact artifact = (Artifact) actor;
+                    string message = artifact.GetMessage();
+                    banner.SetText(message);
+                }
+            } 
+
+            //gem going down/interact function
+            foreach (Actor actor in gems) 
+            {
+                Point actor_position = actor.GetPosition();//Edited here
+                actor_position.Down(15);//edited here (go down cell size)
+                //made go off screen?
+
+                if (robot.GetPosition().Equals(actor.GetPosition()))//what happens when merge artifacts
                 {
                     Artifact artifact = (Artifact) actor;
                     string message = artifact.GetMessage();
